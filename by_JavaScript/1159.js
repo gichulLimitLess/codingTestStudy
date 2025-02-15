@@ -25,13 +25,16 @@ let count = 0;
 for(let i = 0; i < N; i++) {
   if(input[i].charAt(0) === compare_pivot) {
     count++;
-    if(count >= 5) { //성의 앞글자 알파벳이 5개를 넘어가면
-      answer.push(compare_pivot);
-      count = 0;
-    }
   } else { //비교하는 알파벳이 현재 비교 대상의 성 앞글자와 다르면..
     compare_pivot = input[i].charAt(0); //비교하는 알파벳을 변경
-    count = 0;
+    count = 1; 
+  }
+  /* 
+    성의 앞글자 알파벳이 5개에 도달하면 answer 배열에 push!
+    (이상(>=) 조건을 쓰지 않은 이유는.. answer에 여러 번 추가하면 안되니까!)
+  */
+  if(count === 5) { 
+    answer.push(compare_pivot);
   }
 }
 
@@ -41,3 +44,4 @@ if(answer.length === 0) {
 } else {
   console.log(answer.join(''));
 }
+
