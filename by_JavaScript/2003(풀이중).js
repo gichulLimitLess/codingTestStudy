@@ -7,4 +7,4 @@ const input = fs.readFileSync(filePath).toString().split('\n');
 
 //수열의 크기(N), 합(M)
 let N = Number(input[0]);
-let M
+let M 

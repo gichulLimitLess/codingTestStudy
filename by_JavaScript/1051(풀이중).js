@@ -48,7 +48,9 @@ while(checked_count < N*M) {
     edge_length++;
   } else { //다르면
     //다른 방향으로 틀면서 찾아봐야지
-    if(pivot_Number )
+    if(pivot_Number === 0) {
+      
+    }
   }
 }
 
