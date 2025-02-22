@@ -9,7 +9,7 @@ const input = fs.readFileSync(filePath).toString().split('\n');
   전체 배열 탐색 필수 
   => 배열 전체 탐색 도중 0이 아닌 값을 만나면 상/하/좌/우의 정보를 저장해야 함
   
-
+  
 */
 
 //입력 받기
