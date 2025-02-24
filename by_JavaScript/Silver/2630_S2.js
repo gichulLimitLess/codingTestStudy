@@ -72,4 +72,3 @@ function check_Paper(start_x, start_y, end_x, end_y) {
 check_Paper(0,0,N,N);
 console.log(white);
 console.log(blue);
-
