@@ -53,5 +53,3 @@ while(start < N-1 && num_list[N-1] - num_list[start] >= M) {
 
 //결과 출력
 console.log(min_val);
-
-
