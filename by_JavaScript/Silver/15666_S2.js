@@ -13,6 +13,9 @@ const input = fs.readFileSync(filePath).toString().split('\n');
 let [N, M] = input[0].split(' ').map(Number);
 let num_list = input[1].split(' ').map(Number);
 
+//사전 순 출력을 위해 오름차순 정렬
+num_list.sort((a, b) => a - b);
+
 let result = [];
 let result_all = [];
 
@@ -27,7 +30,7 @@ function Combination_withRepetition(depth, start) {
   let temp = -1
   //num_list를 start부터 탐색해봐야 함
   for(let i = start; i < N; i++) {
-    if(temp === num_list[i]) continue; //같은 depth에서 같은 수를 여러 번 선택하는 경우도 컷
+    if(temp === num_list[i]) continue; //같은 depth에서 같은 수를 여러 번 선택하는 경우가 있을 수 있음(temp를 통해 걸러내야 함)
     temp = num_list[i];
     result[depth] = num_list[i];
     Combination_withRepetition(depth+1, i); //재귀 호출 (자기 자신을 다시 뽑을수도 있으니, i+1 대신 i)

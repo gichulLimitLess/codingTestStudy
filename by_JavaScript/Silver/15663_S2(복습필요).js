@@ -1,3 +1,5 @@
+/* 재귀의 동작 방식을 정확히 이해해야 풀 수 있던 문제!! (복습필요(2025/3/1)) */
+
 const fs = require('fs'); //'fs' 객체 가져오기
 const filePath = process.platform === 'linux' ? '/dev/stdin' : __dirname + '/example.txt';
 //input 한 번에 읽어오기
@@ -27,15 +29,17 @@ function permutation(depth) {
     return;
   }
 
+  let temp = -1
   for (let i = 0; i < N; i++) {
     if (visited[i]) continue;
     
     // 연속된 중복 숫자가 있다면, 이전에 방문하지 않은 경우는 무시
-    if (i > 0 && num_list[i] === num_list[i - 1] && !visited[i - 1]) continue;
-
+    // if (i > 0 && num_list[i] === num_list[i - 1] && !visited[i - 1]) continue;
+    if(temp === num_list[i]) continue;
     visited[i] = true;
     result[depth] = num_list[i];
-    permutation(depth + 1);
+    temp = num_list[i];
+    permutation(depth + 1); //재귀 들어감
     visited[i] = false;
   }
 }
