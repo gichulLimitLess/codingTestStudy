@@ -19,6 +19,7 @@ if (consonants.length < 2) {
 }
 
 // 유효성 검사 함수: 모음 1개 이상 & 자음 2개 이상 포함 여부 확인
+// --> 유효성을 다 만들고 검사하는 것이 생각보다 많은 시간이 걸리지 않는다 (불필요하게 다 검사하러 재귀호출 하는 것보다.....)
 function isValid(password) {
   let mo = 0, ja = 0;
   for (const ch of password) {
