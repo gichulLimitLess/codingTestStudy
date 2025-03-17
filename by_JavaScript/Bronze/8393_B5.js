@@ -7,7 +7,7 @@ const filePath = process.platform === 'linux' ? '/dev/stdin' : __dirname + '/exa
 // const input = fs.readFileSync(filePath).toString().trim().split('\n');
 const n = Number(fs.readFileSync(filePath, 'utf-8').trim());
 
-let result = 1;
+let result = 0;
 for(let i = 1; i <= n; i++) {
   result += i;
 }
