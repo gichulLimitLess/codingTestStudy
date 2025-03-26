@@ -1,3 +1,2 @@
-Hello
-Baekjoon
-Online Judge
+Sprout
+3
