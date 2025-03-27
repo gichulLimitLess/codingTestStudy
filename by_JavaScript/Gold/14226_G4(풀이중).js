@@ -23,6 +23,9 @@ const S = Number(fs.readFileSync(filePath).toString().trim());
   --> 가중치가 없고.. 1씩 내려감.. 어...? 이거 상태 공간 탐색하는 BFS 문제임!
   (BFS는 Queue로 해결하면 된다~)
   --> 상태는 직접 만들어 내려가면서 모두 탐색해 봐야 한다(입력으로 주어진 거 따로 없잖아..)
+  --> 한 상태에 대해서 중복 방문하면.. 시간 터짐.. pruning 해야 함 / visited 2차원 배열 만들자
+    visited[화면에 있는 이모티콘 개수][클립보드에 있는 이모티콘 개수]
+    => visited 배열은 2001x2001이면 충분함 (S가 2 <= S <= 1000이니까..)
 */
 
 //Queue 직접 구현
@@ -47,24 +50,31 @@ class Queue {
   }
 }
 
+//visited 배열 만들기
+let visited = [];
+for(let i = 0; i <= 2000; i++) {
+  let a = new Array(2001).fill(false);
+  visited.push(a);
+}
+
 let queue = new Queue();
 /*
   우선 queue에 초기 상태를 넣고 시작한다
-  [현재 화면에 표시된 이모티콘 개수, 현재 클립보드에 있는 이모티콘 개수]
+  [현재 화면에 표시된 이모티콘 개수, 현재 클립보드에 있는 이모티콘 개수, 현재 level(걸린 시간)]
 */
-queue.push([1, 0]); 
-let time = 0;
+queue.push([1, 0, 0]);
 
 function BFS() {
-  //Queue가 빌 때까지 수행한다
+  //특정 시간을 찾을 때까지 반복한다 (return 될 때 찾은 값이, )
   while(true) {
     let value = queue.pop() //queue에 있는 거 하나 뺀다
 
     //1번 연산 --> value[0]를 value[1]에 넣어야 한다
     let value_Of_1 = [...value];
     value_Of_1[1] = value_Of_1[0];
+    value_Of_1[2]++; //시간 증가시켜야 함
     if(value_Of_1[0] === S) { //1번 연산의 결과로 화면에 S개가 있으면
-      break;
+      return value_Of_1[2];
     }
 
     //2번 연산 --> value[1] !== 0이면 value[0] += value[1] 해야 한다
@@ -72,22 +82,40 @@ function BFS() {
     if(value_Of_2[1] !== 0) {
       value_Of_2[0] += value_Of_2[1];
     }
+    value_Of_2[2]++; //시간 증가시켜야 함
     if(value_Of_2[0] === S) { //2번 연산의 결과로 화면에 S개가 있으면
-      break;
+      return value_Of_2[2];
     }
+    
     
     //3번 연산 --> 꺼낸 값[0]--
     let value_Of_3 = [...value];
-    if(value_Of_3 > 0) value_Of_3[0]--; //0보다 클 때만 줄여야지..
+    if(value_Of_3 > 0) { //0보다 큰 경우에만 value_Of_3-- 해야 한다
+      value_Of_3[0]--; 
+    }
+    value_Of_3[2]++; //시간 증가시켜야 함
     if(value_Of_3[0] === S) {//2번 연산의 결과로 화면에 S개가 있으면
-      break;
+      return value_Of_3[2];
     }
 
-    //1~3번 연산을 했는 데에도 여기까지 왔다면.. 아직 못찾은 것
-    queue.push(value_Of_1);
-    queue.push(value_Of_2);
-    queue.push(value_Of_3);
-    
+    /*
+      1~3번 연산을 했는 데에도 여기까지 왔다면.. 아직 못찾은 것
+      방문하지 않은 경우에 대해서만 Queue에 집어 넣어야 한다 (Pruning을 통해 시간초과 방지)
+    */
+    if(!visited[value_Of_1[0]][value_Of_1[1]]) {
+      visited[value_Of_1[0]][value_Of_1[1]] = true;
+      queue.push(value_Of_1);
+    }
+    if(!visited[value_Of_2[0]][value_Of_2[1]]) {
+      visited[value_Of_2[0]][value_Of_2[1]] = true;
+      queue.push(value_Of_2);
+    }
+    if(!visited[value_Of_3[0]][value_Of_3[1]]) {
+      visited[value_Of_3[0]][value_Of_3[1]] = true;
+      queue.push(value_Of_3);
+    }
   }
 }
 
+//결과 출력
+console.log(BFS());
