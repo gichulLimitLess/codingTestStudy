@@ -68,6 +68,9 @@ function BFS() {
   //특정 시간을 찾을 때까지 반복한다 (return 될 때 찾은 값이, )
   while(true) {
     let value = queue.pop() //queue에 있는 거 하나 뺀다
+    if(value[0] > 1000 || value[1] > 1000) { //클립보드 또는 화면에 있는 이모티콘의 개수가 1000개가 넘어가는 경우에 대해서는 연산 X
+      continue;
+    }
 
     //1번 연산 --> value[0]를 value[1]에 넣어야 한다
     let value_Of_1 = [...value];
@@ -79,7 +82,7 @@ function BFS() {
 
     //2번 연산 --> value[1] !== 0이면 value[0] += value[1] 해야 한다
     let value_Of_2 = [...value];
-    if(value_Of_2[1] !== 0) {
+    if(value_Of_2[1] > 0) {
       value_Of_2[0] += value_Of_2[1];
     }
     value_Of_2[2]++; //시간 증가시켜야 함
@@ -90,7 +93,7 @@ function BFS() {
     
     //3번 연산 --> 꺼낸 값[0]--
     let value_Of_3 = [...value];
-    if(value_Of_3 > 0) { //0보다 큰 경우에만 value_Of_3-- 해야 한다
+    if(value_Of_3[0] > 0) { //0보다 큰 경우에만 value_Of_3-- 해야 한다
       value_Of_3[0]--; 
     }
     value_Of_3[2]++; //시간 증가시켜야 함
