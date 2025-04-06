@@ -48,3 +48,6 @@ for _ in range(order_cnt):
     res.append(str(stack[len(stack)-1])) # 맨 위에 정수 출력 (빼내면 안된다)
 
 print('\n'.join(res)) # 한 번에 모아서 출력
+
+# 출력 직전에 변환 (아래의 방법이 더욱 효율적)
+# print('\n'.join(map(str, res)))
