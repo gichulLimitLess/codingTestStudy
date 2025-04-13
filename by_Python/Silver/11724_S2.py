@@ -35,9 +35,9 @@ def BFS(n):
   
   return 1
 
-# 모두 방문해서 component 개수를 세야 한다
-while False in visited:
-  first_idx = visited.index(False)
-  component_cnt += BFS(first_idx)
+# 모두 방문해서 component 개수를 세야 한다 (visited 배열 순차적으로 돌며 탐색)
+for i in range(1, N+1):
+  if visited[i] == False:
+    component_cnt += BFS(i)
 
 print(component_cnt)
