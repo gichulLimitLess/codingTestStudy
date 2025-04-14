@@ -56,12 +56,8 @@ for _ in range(L):
         deque.popleft() #가장 먼저 들어온 놈(꼬리)를 빼낸다
       seconds += 1 # 시간 증가
   
+  #방향 검사 해야 함
   if now_direction[0] == 0 and now_direction[1] == 1:
 
  
-
-      
-
-
-
 print(board)
