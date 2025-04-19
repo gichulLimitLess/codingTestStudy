@@ -30,7 +30,7 @@ num_list = list(map(int, input().split()))
 
 # 오름차순 정렬
 num_list.sort()
-combination = []
+combination = [0] * M
 
 def Combination(depth, start):
     if depth == M:
@@ -38,8 +38,7 @@ def Combination(depth, start):
         return
 
     for i in range(start, N):
-        combination.append(num_list[i])
+        combination[depth] = num_list[i]
         Combination(depth + 1, i + 1)
-        combination.pop()  # 백트래킹
 
 Combination(0, 0)
