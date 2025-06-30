@@ -10,4 +10,3 @@ if operator == '*':
   print(A*B)
 elif operator == '+':
   print(A+B)
-
