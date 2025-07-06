@@ -1,10 +1,5 @@
 '''
-  저작권
+  초콜릿
 '''
-
-A, i = map(int, input().split(' '))
-
-if A == 1:
-  print(i)
-else:
-  print(A*(i-1) + 1)
+N, M = map(int, input().split())
+print((N-1)+(M-1)*N)
